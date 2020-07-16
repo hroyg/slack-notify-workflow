@@ -1,17 +1,156 @@
-on: [push]
+# Triggers on:
+# 1. Pull request from master
+# 2. Push to master
+#
+# Workflow:
+# 1. Build and test a nodejs app
+# 2. On push to master ONLY:
+#    a. Build a docker image and upload it to ECR
+#    b. Set the Jira ticket to "in testing"
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ like_pixellot ]    
+ # pull_request:
+ #   branches: [ master ]
 
 jobs:
-  hello_world_job:
+
+  test_job:
+    name: Build and test
     runs-on: ubuntu-latest
-    name: A job to say hello
+
+    strategy:
+      matrix:
+        node-version: [12.x] # Make sure to test with the docker image's node js version
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Compare Nodejs versions for "Dockerfile" and "current runner machine"
+      working-directory: ${{ github.workspace }}
+      run: | 
+        dockerfile_nodejs=$(grep "FROM node:" Dockerfile | grep -o  "[[:digit:]]\+")
+        runner_nodejs=$(echo ${{ matrix.node-version }} | grep -o "[[:digit:]]\+")             
+        if [ $dockerfile_nodejs -ne $runner_nodejs ] ;then
+          echo "Dockerfile and runner Nodejs versions mismatch ($dockerfile_nodejs -> $runner_nodejs), please update either one"
+          exit 1
+        fi
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm run test
+    
+    - name: Slack Notify
+      uses: act10ns/slack@v1
+      with:
+        status: ${{ job.status }}
+        steps: ${{ toJson(steps) }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.CLOUD_CI_SLACK_URL }}        
+      if: failure() 
+      
+
+  push_image_job:
+    name: Upload to ECR
+    runs-on: ubuntu-latest
+    needs: test_job
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Hello world action step
-      id: hello
-      uses: ./
       with:
-        who-to-greet: 'Mona the Octocat'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
+        fetch-depth: 0
+
+    - name: Create version for docker tag
+      shell: bash
+      run: |
+        echo "Stub -  creating version "
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      run: |
+        echo "Stub -  Login to AWS ECR "
+    
+    - name: Get repo name
+      id: extract-repo-name
+      shell: bash
+      run: |
+        echo "Stub -  get repo name "
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      run: |
+        echo "Stub -  Build image "
+        
+    - name: Slack Notify
+      uses: act10ns/slack@v1
+      with:
+        status: ${{ job.status }}
+        steps: ${{ toJson(steps) }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }}        
+      if: failure()    
+
+  update-jira:
+    name: Update JIRA
+    runs-on: ubuntu-latest
+    needs: push_image_job
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master1' # Hack to skip this job for now
+
+    steps:
+      - name: Setup
+        run: |
+          echo "Stub - setup jira job "
+
+      - name: Checkout
+        run: |
+          echo "Stub - checkout "
+
+      - name: Login
+        run: |
+          echo "Stub - login to jira"
+
+      - name: Get git version
+        id: get-version
+        shell: bash
+        run: |
+          echo " Stub - Get git version"
+
+      - name: Find issue in commit messages
+        id: find-issue
+        run: |
+          echo " Stub - find issue in commit message"
+
+      - name: Transition issue & Set version
+        uses: DorShahaf/gajira-transition@master
+        run: |
+          echo " Stub - transition and set version"
+
+  test-slack:
+    name: slack-test
+    runs-on: ubuntu-latest
+    needs: [test_job,push_image_job]
+    if: always()
+    steps:
+    - uses: technote-space/workflow-conclusion-action@v1
+    - name: Slack Notify
+      uses: act10ns/slack@v1
+      with:
+        status: ${{ env.WORKFLOW_CONCLUSION }}
+        steps: ${{ toJson(steps) }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }}
+
+
+
