@@ -32,20 +32,11 @@ jobs:
     - name: Compare Nodejs versions for "Dockerfile" and "current runner machine"
       working-directory: ${{ github.workspace }}
       run: | 
-        dockerfile_nodejs=$(grep "FROM node:" Dockerfile | grep -o  "[[:digit:]]\+")
-        runner_nodejs=$(echo ${{ matrix.node-version }} | grep -o "[[:digit:]]\+")             
-        if [ $dockerfile_nodejs -ne $runner_nodejs ] ;then
-          echo "Dockerfile and runner Nodejs versions mismatch ($dockerfile_nodejs -> $runner_nodejs), please update either one"
-          exit 1
-        fi
+        echo " Stub - checkout first job"
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm run test
+      run: |
+        echo " Stub - Use nodejs"
     
     - name: Slack Notify
       uses: act10ns/slack@v1
@@ -53,7 +44,7 @@ jobs:
         status: ${{ job.status }}
         steps: ${{ toJson(steps) }}
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.CLOUD_CI_SLACK_URL }}        
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }}        
       if: failure() 
       
 
@@ -65,9 +56,8 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      run: |
+        echo " Stub - checkout second job"
 
     - name: Create version for docker tag
       shell: bash
@@ -75,7 +65,8 @@ jobs:
         echo "Stub -  creating version "
 
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      run: |
+        echo " Stub - configure aws credentials"
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -133,7 +124,6 @@ jobs:
           echo " Stub - find issue in commit message"
 
       - name: Transition issue & Set version
-        uses: DorShahaf/gajira-transition@master
         run: |
           echo " Stub - transition and set version"
 
