@@ -140,4 +140,5 @@ jobs:
         status: ${{ env.WORKFLOW_CONCLUSION }}
         steps: ${{ toJson(steps) }}
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }
+        
