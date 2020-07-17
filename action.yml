@@ -6,6 +6,10 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+  workflow_name:  # id of input
+    description: 'name of current workflow'
+    required: true
+    default: '<placeholder>'  
 outputs:
   time: # id of output
     description: 'The time we greeted you'
@@ -14,4 +18,4 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.who-to-greet }}
-    - ${{ github.workflow }}
+    - ${{ inputs.workflow_name }}
