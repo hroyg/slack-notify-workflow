@@ -149,3 +149,7 @@ jobs:
        repo_token: ${{secrets.GITHUB_TOKEN}}
        slack_webhook_url: ${{secrets.SLACK_URL}}        
         
+    - name: test curl 
+      run: |
+        a=$(curl -sL https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/171555474/jobs |jq .)
+        echo $a
