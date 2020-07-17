@@ -133,13 +133,18 @@ jobs:
     needs: [test_job,push_image_job]
     if: always()
     steps:
-    - uses: technote-space/workflow-conclusion-action@v1
+    #- uses: technote-space/workflow-conclusion-action@v1
     - name: Slack Notify
-      uses: act10ns/slack@v1
+    #  uses: act10ns/slack@v1
+    #  with:
+    #    status: ${{ env.WORKFLOW_CONCLUSION }}
+    #    steps: ${{ toJson(steps) }}
+    #  env:
+    #    SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }}
+    - name: Slack Workflow Notification
+      uses: Gamesight/slack-workflow-status@master
       with:
-        status: ${{ env.WORKFLOW_CONCLUSION }}
-        steps: ${{ toJson(steps) }}
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }}
-        
+          # Required Input
+       repo_token: ${{secrets.GITHUB_TOKEN}}
+       slack_webhook_url: ${{secrets.SLACK_URL}}        
         
