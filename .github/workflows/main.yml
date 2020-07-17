@@ -37,6 +37,12 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       run: |
         echo " Stub - Use nodejs"
+        
+    - name: Hello world action step
+      id: hello
+      uses: ./
+      with:
+        who-to-greet: 'Mona the Octocat'    
     
     - name: Slack Notify
       uses: act10ns/slack@v1
