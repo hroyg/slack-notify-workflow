@@ -37,7 +37,6 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       run: |
         echo " Stub - Use nodejs"
-        exit 1
     
     - name: Slack Notify
       uses: act10ns/slack@v1
