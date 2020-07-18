@@ -157,8 +157,9 @@ jobs:
         
     - name: test curl 
       run: |
-        a=$(curl -sL https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/171555474/jobs |jq .)
-        echo $a |jq .
+        #a=$(curl -sL https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/171555474/jobs |jq .)
+        #echo $a |jq .
+        env
 
 
 
