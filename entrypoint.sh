@@ -15,6 +15,7 @@ workflow_failure=false
 
 workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL})
 # | jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
+jq --version
 echo $workflow_jobs | jq '.jobs[]'
 
 
