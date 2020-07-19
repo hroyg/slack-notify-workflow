@@ -13,24 +13,14 @@ get_data(){
 }
 
 
-SLACK_WEBHOOK=i"https://hooks.slack.com/services/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"
-
-WORFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/${{ github.run_id }}/jobs" # change job id to dyanmic var 
+WORFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/${workflow_run_number}/jobs" # change job id to dyanmic var 
 
 
 
 workflow_success=true
 workflow_failure=false
 
-workflow_jobs=$(get_data $WORFLOW_JOBS_URL $GITHUB_TOKEN|jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
-
-
-
-
-
-
-
-
+workflow_jobs=$(get_data $WORFLOW_JOBS_URL jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
 
 
 
@@ -48,4 +38,5 @@ echo $workflow_jobs  |jq  -c -r '.[]| .conclusion'| \
                         echo  "faild"
                         break
                 fi
+                echo "^^^^^^^^^^^^^^^^^^^^^^^^^^SUCCESS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6"
         done
