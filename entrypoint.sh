@@ -8,13 +8,12 @@ get_data(){
 
 
 WORKFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/$3/jobs" 
-
 workflow_success=true
 workflow_failure=false
 
 workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL} | jq '.jobs[] | [select(.status == "completed") | {name,conclusion,id,run_id,started_at}] |sort_by(.started_at)')
 
-echo $workflow_jobs |jq .
+echo $workflow_jobs |jq '.[] | .conclusion'
 
 echo $workflow_jobs |jq '.[] | .conclusion' |  \
   while read job_conclusion ;do\
