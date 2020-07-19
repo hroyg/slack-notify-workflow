@@ -10,6 +10,10 @@ inputs:
     description: 'name of current workflow'
     required: true
     default: '<placeholder>'  
+  workflow_run_number:  # id of input
+    description: 'A unique number for each workflow run within a repository.'
+    required: true
+    default: '<placeholder>'   
 outputs:
   time: # id of output
     description: 'The time we greeted you'
@@ -19,3 +23,4 @@ runs:
   args:
     - ${{ inputs.who-to-greet }}
     - ${{ inputs.workflow_name }}
+    - ${{ inputs.workflow_run_number }}
