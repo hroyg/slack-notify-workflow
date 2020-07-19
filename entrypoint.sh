@@ -3,7 +3,7 @@
 
 get_data(){
 #debug
-   echo "curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  ${WORKFLOW_JOBS_URL"}
+   echo "curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  ${WORKFLOW_JOBS_URL}"
          curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  ${WORKFLOW_JOBS_URL}     # check if authentication is needed 
 }
 
