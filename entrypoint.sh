@@ -9,6 +9,8 @@
 
 
 get_data(){
+#debug
+   echo "curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $1 "
         curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $1      # check if authentication is needed 
 }
 
