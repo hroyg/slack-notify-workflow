@@ -18,19 +18,19 @@ workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL} |jq '.jobs[] | [select(.status == 
 
 
 
-   echo $workflow_jobs |jq '.[] | .conclusion' |  \
-   while read job_conclusion ;do\
+#   echo $workflow_jobs |jq '.[] | .conclusion' |  \
+#   while read job_conclusion ;do\
 
-  if [[ $job_conclusion == "cancelled" ]] ; then
-  workflow_success=false
-  echo "cancel"
-  break
-  fi
+#  if [[ $job_conclusion == "cancelled" ]] ; then
+#  workflow_success=false
+#  echo "cancel"
+#  break
+#  fi
 
-  if [[ $job_conclusion == "failure"  ]] ; then
-  workflow_failure=true
-  echo  "faild"
-  break
-  fi
-  echo "^^^^^^^^^^^^^^^^^^^^^^^^^^SUCCESS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
-  done
+#  if [[ $job_conclusion == "failure"  ]] ; then
+#  workflow_failure=true
+#  echo  "faild"
+#  break
+#  fi
+#  echo "^^^^^^^^^^^^^^^^^^^^^^^^^^SUCCESS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+#  done
