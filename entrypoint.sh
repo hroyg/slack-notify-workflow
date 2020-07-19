@@ -13,7 +13,7 @@ WORKFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/acti
 workflow_success=true
 workflow_failure=false
 
-workflow_jobs=$(get_data $WORKFLOW_JOBS_URL | jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
+workflow_jobs=$(get_data $WORKFLOW_JOBS_URL)# | jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
 echo $workflow_jobs | jq .
 
 
