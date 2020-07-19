@@ -3,18 +3,18 @@
 
 get_data(){
 #debug
-   echo "curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $3 "
-        curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $3      # check if authentication is needed 
+   echo "curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  ${WORKFLOW_JOBS_URL"}
+         curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  ${WORKFLOW_JOBS_URL}     # check if authentication is needed 
 }
 
 
-WORFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/$3/jobs" # change job id to dyanmic var 
-echo "WORFLOW_JOBS_URL: is parsed as -  ${WORFLOW_JOBS_URL}"
+WORKFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/$3/jobs" # change job id to dyanmic var 
+echo "WORKFLOW_JOBS_URL: is parsed as -  ${WORKFLOW_JOBS_URL}"
 
 workflow_success=true
 workflow_failure=false
 
-workflow_jobs=$(get_data $WORFLOW_JOBS_URL) # jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
+workflow_jobs=$(get_data $WORKFLOW_JOBS_URL) # jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
 echo $workflow_jobs #|jq .
 
 
