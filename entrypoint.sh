@@ -33,3 +33,4 @@ echo $workflow_jobs |jq '.[] | .conclusion' |  \
       echo "^^^^^^^^^^^^^^^^^^^^^^^^^^SUCCESS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
   done
 
+
