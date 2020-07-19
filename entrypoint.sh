@@ -1,14 +1,10 @@
 #!/bin/sh -l
-#echo "-------$2------------"
-#echo "Hello $1"
-#time=$(date)
-#echo "::set-output name=time::$time"
 
 
 get_data(){
 #debug
-   echo "curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $1 "
-        curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $1      # check if authentication is needed 
+   echo "curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $3 "
+        curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $3      # check if authentication is needed 
 }
 
 
