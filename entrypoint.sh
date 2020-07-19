@@ -19,20 +19,20 @@ jq --version
 echo $workflow_jobs | jq '.jobs[]'
 
 
-echo $workflow_jobs  |jq  -c -r '.jobs[]| .conclusion'| \
-        while read job_conclusion ;do\
-
-                if [[ $job_conclusion == "cancelled" ]] ; then
-                        workflow_success=false
-                        echo "cancel"
-                        break
-                fi
-
-                if [[ $job_conclusion == "failure"  ]] ; then
-                        workflow_failure=true
-                        echo  "faild"
-                        break
-                fi
-                echo "^^^^^^^^^^^^^^^^^^^^^^^^^^SUCCESS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6"
-        done
+#  echo $workflow_jobs  |jq  -c -r '.jobs[]| .conclusion'| \
+#  while read job_conclusion ;do\
+#
+#  if [[ $job_conclusion == "cancelled" ]] ; then
+#  workflow_success=false
+#  echo "cancel"
+#  break
+#  fi
+#
+#  if [[ $job_conclusion == "failure"  ]] ; then
+#  workflow_failure=true
+#  echo  "faild"
+#  break
+#  fi
+#  echo "^^^^^^^^^^^^^^^^^^^^^^^^^^SUCCESS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+#  done
 
