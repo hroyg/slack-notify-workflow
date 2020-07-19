@@ -5,9 +5,6 @@
 #echo "::set-output name=time::$time"
 
 
-#!/bin/bash
-
-
 get_data(){
 #debug
    echo "curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $1 "
