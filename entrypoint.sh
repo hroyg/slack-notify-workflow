@@ -8,7 +8,7 @@ get_data(){
 }
 
 
-WORFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/${INPUT_GITHUB_RUN_ID}/jobs" # change job id to dyanmic var 
+WORFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/$3/jobs" # change job id to dyanmic var 
 echo "WORFLOW_JOBS_URL: is parsed as -  ${WORFLOW_JOBS_URL}"
 
 workflow_success=true
