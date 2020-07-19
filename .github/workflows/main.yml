@@ -153,6 +153,8 @@ jobs:
         #a=$(curl -sL https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/171555474/jobs |jq .)
         #echo $a |jq .
         env
+
+    - uses: actions/checkout@v2    
         
     - name: Hello world action step
       id: hello
