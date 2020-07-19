@@ -9,13 +9,12 @@ get_data(){
 
 
 WORKFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/$3/jobs" # change job id to dyanmic var 
-echo "WORKFLOW_JOBS_URL: is parsed as -  ${WORKFLOW_JOBS_URL}"
 
 workflow_success=true
 workflow_failure=false
 
-workflow_jobs=$(get_data $WORKFLOW_JOBS_URL) # jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
-echo $workflow_jobs #|jq .
+workflow_jobs=$(get_data $WORKFLOW_JOBS_URL) jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
+echo $workflow_jobs  jq .
 
 
 echo $workflow_jobs  |jq  -c -r '.[]| .conclusion'| \
