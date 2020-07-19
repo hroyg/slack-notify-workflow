@@ -16,7 +16,7 @@ workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL} | jq '.jobs[] | [select(.status ==
 echo $workflow_jobs |jq '.[]'
 echo $workflow_jobs |jq '.[] | .conclusion'
 #########DEBUG#########
-echo $workflow_jobs |jq '.[] | .conclusion' |  \
+echo $workflow_jobs |jq -c -r '.[] | .conclusion' |  \
   while read job_conclusion ;do\
 
       if [[ $job_conclusion == "cancelled" ]] ; then
