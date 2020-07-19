@@ -7,7 +7,7 @@ get_data(){
         curl -sL -H 'Cache-Control: no-cache' -H 'Accept: application/vnd.github.v3+json'  $3      # check if authentication is needed 
 }
 
-
+echo " iam inside the enterypoint , now figure was is fucked up here"
 WORFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/${workflow_run_number}/jobs" # change job id to dyanmic var 
 
 
