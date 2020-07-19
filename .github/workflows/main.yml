@@ -36,15 +36,7 @@ jobs:
 
     - name: Use Node.js ${{ matrix.node-version }}
       run: |
-        echo " Stub - Use nodejs"
-        
-    - name: Hello world action step
-      id: hello
-      uses: ./
-      with:
-        who-to-greet: 'Mona the Octocat' 
-        workflow_name:  ${{ github.workflow }}
-        github_run_id: ${{ github.run_id }}    
+        echo " Stub - Use nodejs"    
     
     - name: Slack Notify
       uses: act10ns/slack@v1
@@ -161,7 +153,14 @@ jobs:
         #a=$(curl -sL https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/171555474/jobs |jq .)
         #echo $a |jq .
         env
-
+        
+    - name: Hello world action step
+      id: hello
+      uses: ./
+      with:
+        who-to-greet: 'Mona the Octocat' 
+        workflow_name:  ${{ github.workflow }}
+        github_run_id: ${{ github.run_id }}
 
 
 
