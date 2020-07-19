@@ -44,7 +44,7 @@ jobs:
       with:
         who-to-greet: 'Mona the Octocat' 
         workflow_name:  ${{ github.workflow }}
-        workflow_run_number: ${{ github.run_number }}    
+        workflow_run_id: ${{ github.run_id }}    
     
     - name: Slack Notify
       uses: act10ns/slack@v1
