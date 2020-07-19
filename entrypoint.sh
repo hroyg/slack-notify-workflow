@@ -40,3 +40,4 @@ echo $workflow_jobs  |jq  -c -r '.[]| .conclusion'| \
                 fi
                 echo "^^^^^^^^^^^^^^^^^^^^^^^^^^SUCCESS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6"
         done
+
