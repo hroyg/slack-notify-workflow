@@ -7,7 +7,7 @@ get_data(){
 }
 
 
-WORKFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/174610267/jobs" 
+WORKFLOW_JOBS_URL="https://api.github.com/repos/hroyg/slack-notify-workflow/actions/runs/$3/jobs" 
 
 workflow_success=true
 workflow_failure=false
