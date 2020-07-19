@@ -12,9 +12,10 @@ workflow_success=true
 workflow_failure=false
 
 workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL} | jq '.jobs[] | [select(.status == "completed") | {name,conclusion,id,run_id,started_at}] |sort_by(.started_at)')
-
+#########DEBUG########
+echo $workflow_jobs |jq '.[]
 echo $workflow_jobs |jq '.[] | .conclusion'
-
+#########DEBUG#########
 echo $workflow_jobs |jq '.[] | .conclusion' |  \
   while read job_conclusion ;do\
 
