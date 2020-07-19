@@ -14,7 +14,7 @@ echo "WORFLOW_JOBS_URL: is parsed as -  ${WORFLOW_JOBS_URL}"
 workflow_success=true
 workflow_failure=false
 
-workflow_jobs=$(get_data $WORFLOW_JOBS_URL # jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
+workflow_jobs=$(get_data $WORFLOW_JOBS_URL) # jq '.jobs[] |[select(.status == "completed") |{name,status,conclusion,id,run_id,started_at}]|sort_by(.started_at)')
 echo $workflow_jobs #|jq .
 
 
