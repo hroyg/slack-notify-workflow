@@ -14,9 +14,12 @@ inputs:
     description: 'The owner and repository name.'
     required: true
     default: '<placeholder-github-repository>'  
+    failed_job
 outputs:
   workflow_result: # id of output
     description: 'The result of the current workflow run (success,cancelled,failure)'
+  failed_job: # id of output
+    description: 'The name of the job that was failed(only if workflow conclusion is failure)'  
   failed_step: # id of output
     description: 'The name of the step that was failed(only if workflow conclusion is failure)'  
 runs:
