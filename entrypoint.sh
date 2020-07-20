@@ -11,7 +11,7 @@ WORKFLOW_JOBS_URL="https://api.github.com/repos/$3/actions/runs/$2/jobs"
 workflow_success=true
 workflow_failure=false
 
-workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL} | jq '[.jobs[] | select(.status == "completed") | {name,conclusion,id,run_id,started_at}] |sort_by(.started_at)')
+workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL} | jq '[.jobs[] | select(.status == "completed") | {name,conclusion,id,run_id,started_at,steps}] |sort_by(.started_at)')
 #########DEBUG########
 #echo $workflow_jobs |jq '.[]'
 #echo $workflow_jobs |jq '.[] | .conclusion'
@@ -42,7 +42,7 @@ case "${workflow_success},${workflow_failure}" in
                                                                                                          
   true,true  )   echo "::set-output name=workflow_result::failure"                                
                  echo "::set-output name=failed_step::$failed_job_step"                           
-                 echo $failed_job_step  ;;                                                          
+                 echo $failed_job_step  ;;                                                                  #DEBUG                                                         
                                                                                                          
   *          )   echo "::set-output name=workflow_result::success"  ;;                            
 
