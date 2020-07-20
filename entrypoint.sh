@@ -40,13 +40,13 @@ done
 case "${workflow_success},${workflow_failure}" in                                                        
                                                                                                          
                                                                                                          
-       false,false)    echo "::set-output name=workflow_result::cancelled"  ;;                           
+       false,false)    echo A#"::set-output name=workflow_result::cancelled"  ;;                           
                                                                                                          
-        true,true)      echo "::set-output name=workflow_result::failure"                                
-                        echo "::set-output name=failed_step::$failed_job_step"                           
+        true,true)      echo B#"::set-output name=workflow_result::failure"                                
+                        echo C#"::set-output name=failed_step::$failed_job_step"                           
                         echo $failed_job_step;;                                                          
                                                                                                          
-                *)      echo "::set-output name=workflow_result::success"  ;;                            
+                *)      echo E#"::set-output name=workflow_result::success"  ;;                            
 esac
 
 
