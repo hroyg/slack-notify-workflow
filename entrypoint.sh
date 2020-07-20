@@ -42,8 +42,8 @@ case "${workflow_success},${workflow_failure}" in
   false,false)   echo "::set-output name=workflow_result::cancelled"  ;;                           
                                                                                                          
   true,true  )   echo "::set-output name=workflow_result::failure"                                
-                 echo "::set-output name=failed_job::for job-$failed_job"  
-                 echo "::set-output name=failed_step::on step-$failed_job_step"  ;;                                                                                                                        
+                 echo "::set-output name=failed_job::For Job:$failed_job"  
+                 echo "::set-output name=failed_step::, On Step:$failed_job_step"  ;;                                                                                                                        
                                                                                                          
   *          )   echo "::set-output name=workflow_result::success"  ;;                            
 
