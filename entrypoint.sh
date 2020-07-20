@@ -19,13 +19,13 @@ echo $workflow_jobs |jq '.[] | .conclusion'
 jobs_conclusion=$(echo $workflow_jobs |jq -r -c '.[] | .conclusion')
 for conclusion in $jobs_conclusion ; do
       echo  $conclusion #DEBUG
-      if [[ $job_conclusion == "cancelled" ]] ; then
+      if [[ $conclusion == "cancelled" ]] ; then
         workflow_success=false
         echo  "------------------------CANCELLED------------------"
         break
       fi
 
-      if [[ $job_conclusion == "failure"  ]] ; then
+      if [[ $conclusion == "failure"  ]] ; then
         workflow_failure=true
         echo  "------------------------FAILURE------------------"
         failed_job_step=$(echo $workflow_jobs |jq -r '.[]|select(.conclusion == "failure") | .steps[] | select(.conclusion == "failure") | .name')
