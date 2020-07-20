@@ -149,11 +149,11 @@ jobs:
       uses: rtCamp/action-slack-notify@master
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_URL }}
-        SLACK_CHANNEL: github-action-slack
-        SLACK_COLOR: '#053d0a'
-        #SLACK_ICON: https://github.com/rtCamp.png?size=48
+        SLACK_CHANNEL: 'github-action-slack'
+        SLACK_COLOR: '#63DE0E'
         SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/Octocat.png?size=48
-        SLACK_MESSAGE: 'workflow ${{ steps.hello.outputs.workflow_result }} for job# ${{ steps.hello.outputs.failed_job }} on step ${{ steps.hello.outputs.failed_step }}'
-        SLACK_TITLE: Post Title
-        SLACK_USERNAME: rtCamp
+        SLACK_MESSAGE: 'workflow ${{ steps.hello.outputs.workflow_result }} ${{ steps.hello.outputs.failed_job }} ${{ steps.hello.outputs.failed_step }}'
+        SLACK_TITLE: 'WorkFlow Conclusion:'
+        SLACK_USERNAME: GitHub Action
+        SLACK_FOOTER: ${{ github.actor }}
         
