@@ -28,6 +28,7 @@ for conclusion in $jobs_conclusion ; do
       if [[ $conclusion == "failure"  ]] ; then
         workflow_failure=true
         echo  "------------------------FAILURE------------------"                                     #DEBUG
+        failed_job=$(echo $workflow_jobs |jq -r '.[] | select(.conclusion == "failure") | .name')
         failed_job_step=$(echo $workflow_jobs |jq -r '.[]|select(.conclusion == "failure") | .steps[] | select(.conclusion == "failure") | .name')
         break
       fi
@@ -41,8 +42,8 @@ case "${workflow_success},${workflow_failure}" in
   false,false)   echo "::set-output name=workflow_result::cancelled"  ;;                           
                                                                                                          
   true,true  )   echo "::set-output name=workflow_result::failure"                                
-                 echo "::set-output name=failed_step::$failed_job_step"                           
-                 echo $failed_job_step  ;;                                                                  #DEBUG                                                         
+                 echo "::set-output name=failed_job::for job-$failed_job"  
+                 echo "::set-output name=failed_step::on step-$failed_job_step"  ;;                                                                                                                        
                                                                                                          
   *          )   echo "::set-output name=workflow_result::success"  ;;                            
 
