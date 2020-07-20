@@ -47,5 +47,3 @@ case "${workflow_success},${workflow_failure}" in
   *          )   echo "::set-output name=workflow_result::success"  ;;                            
 
 esac
-
-
