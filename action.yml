@@ -18,7 +18,7 @@ outputs:
   workflow_result: # id of output
     description: 'The result of the current workflow run (success,cancelled,failure)'
   failed_step: # id of output
-    description: 'The name of the step that was failed()'  
+    description: 'The name of the step that was failed(only if workflow conclusion is failure)'  
 runs:
   using: 'docker'
   image: 'Dockerfile'
