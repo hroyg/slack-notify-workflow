@@ -117,13 +117,12 @@ jobs:
       - name: Transition issue & Set version
         run: |
           echo " Stub - transition and set version"
-
   test-slack:
-   # name: slack-test
-   # runs-on: ubuntu-latest
-   # needs: [test_job,push_image_job]
-   # if: always()
-   # steps:
+    name: slack-test
+    runs-on: ubuntu-latest
+    needs: [test_job,push_image_job]
+    if: always()
+    steps:
                       #- uses: technote-space/workflow-conclusion-action@v1
                       #- name: Slack Notify
                       #  uses: act10ns/slack@v1
