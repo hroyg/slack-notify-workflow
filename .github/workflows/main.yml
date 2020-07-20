@@ -1,13 +1,3 @@
-# Triggers on:
-# 1. Pull request from master
-# 2. Push to master
-#
-# Workflow:
-# 1. Build and test a nodejs app
-# 2. On push to master ONLY:
-#    a. Build a docker image and upload it to ECR
-#    b. Set the Jira ticket to "in testing"
-
 name: Node.js CI
 
 on:
