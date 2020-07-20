@@ -154,3 +154,7 @@ jobs:
         workflow_name:  ${{ github.workflow }}
         github_run_id: ${{ github.run_id }}
         github_repository: ${{ github.repository }}
+        
+    - name: Check environment variable
+      run: |
+        env
