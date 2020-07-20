@@ -2,25 +2,28 @@
 name: 'Slack Workflow Norify'
 description: 'Send slack notification for CI workflow status.'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
   workflow_name:  # id of input
     description: 'name of current workflow'
     required: true
-    default: '<placeholder>'  
+    default: '<placeholder-workflow-name>'  
   github_run_id:  # id of input
     description: 'A unique number for each workflow run within a repository.'
     required: true
-    default: '<placeholder>'   
+    default: '<placeholder-github-run-id>'  
+  github_repository:  # id of input
+    description: 'The owner and repository name.'
+    required: true
+    default: '<placeholder-github-repository>'  
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  workflow_result: # id of output
+    description: 'The result of the current workflow run (success,cancelled,failure)'
+  failed_step: # id of output
+    description: 'The name of the step that was failed()'  
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
     - ${{ inputs.workflow_name }}
     - ${{ inputs.github_run_id }}
+    - ${{ inputs.github_repository }}
+    
