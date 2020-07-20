@@ -59,6 +59,7 @@ jobs:
       run: |
         echo " Stub - checkout second job"
         sleep 5
+        exit 1
 
     - name: Create version for docker tag
       shell: bash
