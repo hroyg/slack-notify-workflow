@@ -1,6 +1,5 @@
 #!/bin/sh -l
 
-
 get_data(){
    
          curl -sL -H 'Cache-Control: no-cache'  -H 'Accept: application/vnd.github.v3+json'  $1  
@@ -48,3 +47,4 @@ case "${workflow_success},${workflow_failure}" in
   *          )   echo "::set-output name=workflow_result::success"  ;;                            
 
 esac
+
