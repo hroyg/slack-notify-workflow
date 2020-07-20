@@ -27,16 +27,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       run: |
         echo " Stub - Use nodejs"    
-    
-    - name: Slack Notify
-      uses: act10ns/slack@v1
-      with:
-        status: ${{ job.status }}
-        steps: ${{ toJson(steps) }}
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_URL }}        
-      if: failure() 
-      
+          
 
   push_image_job:
     name: Upload to ECR
@@ -157,7 +148,8 @@ jobs:
     - name: Notify
       uses: innocarpe/actions-slack@v1
       with:
-        status: ${{ steps.hello.outputs.workflow_result }} # Required
+ #      status: ${{ steps.hello.outputs.workflow_result }} # Required
+        status: ${{ job.status }} # Required
  #       success_text: 'Step Succeeded 🚀' # Optional
         failure_text: ${{ steps.hello.outputs.failed_step }}      #    😱' # Optional
  #       cancelled_text: 'Step Cancelled ⚠️' # Optional
