@@ -13,12 +13,12 @@ workflow_failure=false
 
 workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL} | jq '[.jobs[] | select(.status == "completed") | {name,conclusion,id,run_id,started_at}] |sort_by(.started_at)')
 #########DEBUG########
-#echo $workflow_jobs |jq '.[]'
-#echo $workflow_jobs |jq '.[] | .conclusion'
+echo $workflow_jobs |jq '.[]'
+echo $workflow_jobs |jq '.[] | .conclusion'
 #########DEBUG#########
 jobs_conclusion=$(echo $workflow_jobs |jq -r -c '.[] | .conclusion')
 for conclusion in $jobs_conclusion ; do
-
+      echo  $conclusion #DEBUG
       if [[ $job_conclusion == "cancelled" ]] ; then
         workflow_success=false
         echo  "------------------------CANCELLED------------------"
