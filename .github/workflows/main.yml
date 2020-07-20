@@ -154,7 +154,7 @@ jobs:
         SLACK_COLOR: '#63DE0E'
         SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/Octocat.png?size=48
         SLACK_MESSAGE: 'Workflow ${{ steps.hello.outputs.workflow_result }} ${{ steps.hello.outputs.failed_job }} ${{ steps.hello.outputs.failed_step }}'
-        SLACK_TITLE: 'WorkFlow Status:'
+        SLACK_TITLE: 'Status:'
         SLACK_USERNAME: GitHub Action
         SLACK_FOOTER: '${{ github.workflow }}#${{ github.run_number }}'
         
