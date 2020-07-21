@@ -5,14 +5,14 @@ get_data(){
          curl -sL -H 'Cache-Control: no-cache'  -H 'Accept: application/vnd.github.v3+json'  $1  
 }
 
-WORKFLOW_JOBS_URL="https://api.github.com/repos/$3/actions/runs/$2/jobs" 
+WORKFLOW_JOBS_URL="https://api.github.com/repos/$3/actions/runs/$2/jobs"   # Api to get current workflow jobs and steps.
 workflow_success=true
 workflow_failure=false
 workflow_jobs=$(get_data ${WORKFLOW_JOBS_URL} | jq '[.jobs[] | select(.status == "completed") | {name,conclusion,id,run_id,started_at,steps}] |sort_by(.started_at)')
-jobs_conclusion=$(echo $workflow_jobs |jq -r -c '.[] | .conclusion')
+jobs_conclusion=$(echo $workflow_jobs |jq -r -c '.[] | .conclusion')       # Filter for every job only to get only run status(conclusion).
 
 for conclusion in $jobs_conclusion ; do
-      if [[ $conclusion == "cancelled" ]] ; then
+      if [[ $conclusion == "cancelled" ]] ; then                           # Assuming seccess change boolean flag for either cancelled or failure and break.
         workflow_success=false
         break
       fi
@@ -28,7 +28,7 @@ done
 
 case "${workflow_success},${workflow_failure}" in                                                        
                                                                                                                                                                                                                  
-  false,false)   echo "::set-output name=workflow_result::Cancelled"    
+  false,false)   echo "::set-output name=workflow_result::Cancelled"      # Set github action outputs
                  echo "::set-output name=notification_color::#FCD84F"  ;;
   
                                                                                                          
