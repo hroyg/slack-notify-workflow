@@ -6,6 +6,12 @@ the job assumes workflow success, and changes its status on first job that repor
 
 ## Inputs
 
+| Name | Required | Description|
+| :---         |     :---:      |          ---: |
+| workflow_name| required  git status    |
+| github_run_id| required | git diff      |
+|               
+
 * ``workflow_name`` - (**required**) - The name of the workflow we are curently running. Default: `"<placeholder-workflow-name>"`.
 * `github_run_id` - (**required**) - A unique number for each run within a repository. This number does not change if you re-run the workflow run. Default: `"<placeholder-github_run_id>"`.
 * `github_repository` - (**required**) - The owner and repository name. e.g, pixellot/Hello-World. Default: `"<placeholder-github-repository>"`.
