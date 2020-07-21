@@ -20,11 +20,37 @@ This action returns the workflow status (Success, Cancelled, Failure), in case o
 
 ## Example usage
 ```yaml
-- name: Workflow Status 
-  id: workflow-status
-  uses: pixellot/workflow-status
-  with:
-    workflow_name:  ${{ github.workflow }}
-    github_run_id: ${{ github.run_id }}
-    github_repository: ${{ github.repository }}
+name: Node.js CI
+on:
+  push:
+    branches: [ master ]    
+jobs:
+
+test-slack:
+  name: slack-test
+  runs-on: ubuntu-latest
+  needs: []
+  if: always()
+  steps:
+  
+  - name: Workflow Status 
+    id: workflow-status
+    uses: pixellot/workflow-status
+    with:
+      workflow_name:  ${{ github.workflow }}
+      github_run_id: ${{ github.run_id }}
+      github_repository: ${{ github.repository }}
+
+  - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: '${{ secrets.SLACK_URL }}'
+          SLACK_CHANNEL: 'github-action-slack'
+          SLACK_COLOR: '${{ steps.workflow-Status.outputs.notification_color }}'
+          SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/Octocat.png?size=48
+          SLACK_MESSAGE: "Workflow *${{ steps.workflow-Status.outputs.workflow_result }}*\nJob: ${{ steps.workflow-Status.outputs.failed_job }}\nStep: ${{ steps.workflow-Status.outputs.failed_step }}"
+          SLACK_TITLE: 'Status:'
+          SLACK_USERNAME: GitHub Action
+          SLACK_FOOTER: '${{ github.workflow }}#${{ github.run_number }}'    
+    
 ```
