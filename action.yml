@@ -1,16 +1,33 @@
 # action.yml
-name: 'Slack Workflow Norify'
-description: 'Send slack notification for CI workflow status.'
+name: 'Workflow Status'
+description: 'Returns workflow summery status(success, cancelled, failure), in case of failure it also returns the job and step of failure'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  workflow_name:  # id of input
+    description: 'name of current workflow'
     required: true
-    default: 'World'
+    default: '<placeholder-workflow-name>'  
+  github_run_id:  
+    description: 'A unique number for each workflow run within a repository.'
+    required: true
+    default: '<placeholder-github-run-id>'  
+  github_repository:  
+    description: 'The owner and repository name.'
+    required: true
+    default: '<placeholder-github-repository>'  
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  workflow_result: # id of output
+    description: 'The result of the current workflow run (success,cancelled,failure)'
+  failed_job: 
+    description: 'The name of the job that was failed(only if workflow conclusion is failure)'  
+  failed_step: 
+    description: 'The name of the step that was failed(only if workflow conclusion is failure)'  
+  notification_color: 
+    description:  'color for slack notification. '
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.workflow_name }}
+    - ${{ inputs.github_run_id }}
+    - ${{ inputs.github_repository }}
+    
