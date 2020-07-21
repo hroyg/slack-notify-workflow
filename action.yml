@@ -20,8 +20,9 @@ outputs:
   failed_job: 
     description: 'The name of the job that was failed(only if workflow conclusion is failure)'  
   failed_step: 
-    default: 'test'
     description: 'The name of the step that was failed(only if workflow conclusion is failure)'  
+  notification_color: 
+    description:  'color for slack notification. '
 runs:
   using: 'docker'
   image: 'Dockerfile'
