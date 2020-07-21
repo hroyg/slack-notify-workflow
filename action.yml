@@ -1,6 +1,6 @@
 # action.yml
-name: 'Slack Workflow Norify'
-description: 'Send slack notification for CI workflow status.'
+name: 'Workflow Status'
+description: 'Returns workflow summery status(success, cancelled, failure), in case of failure it also returns the job and step of failure'
 inputs:
   workflow_name:  # id of input
     description: 'name of current workflow'
