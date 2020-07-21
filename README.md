@@ -1,6 +1,8 @@
 # Workflow Status Action 
 
 This action returns the workflow status (Success, Cancelled, Failure), in case of failure it also returns the failed job name and the failed job step name.
+This action should last in the final job of the workflow(it doesn't report on the job it's is currently running).
+the job assumes workflow success, and changes its status on first job that report's a "cancel" or "failure" state as a final conclustion.
 
 ## Inputs
 
@@ -20,6 +22,8 @@ This action returns the workflow status (Success, Cancelled, Failure), in case o
 
 ## Example usage
 ```yaml
+# ci-WORKFLOW-yaml
+
 name: Node.js CI
 on:
   push:
