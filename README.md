@@ -6,7 +6,7 @@ This action returns the workflow status (Success, Cancelled, Failure), in case o
 
 - `workflow_name` -(**Required:**)- The name of the workflow we are curently running. Default `"<placeholder-workflow-name>"`.
 - `github_run_id` -(**Required:**)- A unique number for each run within a repository. This number does not change if you re-run the workflow run. Default `"<placeholder-github_run_id>"`.
-- github_repository` -(**Required:**)- The owner and repository name. For example, Codertocat/Hello-World. Default `"<placeholder-github-repository>"`.
+- `github_repository` -(**Required:**)- The owner and repository name. e.g, pixellot/Hello-World. Default `"<placeholder-github-repository>"`.
 
 ## Outputs
 
@@ -19,7 +19,8 @@ This action returns the workflow status (Success, Cancelled, Failure), in case o
 - `notification_color` - The color for A slack notification (Green, Yelllow, Red).
 
 ## Example usage
-```- name: Workflow Status 
+```yaml
+- name: Workflow Status 
   id: workflow-status
   uses: pixellot/workflow-status
   with:
