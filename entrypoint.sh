@@ -29,7 +29,7 @@ done
 case "${workflow_success},${workflow_failure}" in                                                        
                                                                                                                                                                                                                  
   false,false)   echo "::set-output name=workflow_result::cancelled"    
-                 echo "::set-output name=notification_color::#F56918"  ;;
+                 echo "::set-output name=notification_color::#FCD84F"  ;;
   
                                                                                                          
   true,true  )   echo "::set-output name=workflow_result::failure"                                
