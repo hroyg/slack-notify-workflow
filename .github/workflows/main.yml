@@ -152,7 +152,7 @@ jobs:
         SLACK_CHANNEL: 'github-action-slack'
         SLACK_COLOR: '${{ steps.workflow-Status.outputs.notification_color }}'
         SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/Octocat.png?size=48
-        SLACK_MESSAGE: "Workflow *${{ steps.workflow-Status.outputs.workflow_result }}* ; Job: ${{ steps.workflow-Status.outputs.failed_job }} ; Step: ${{ steps.workflow-Status.outputs.failed_step }}"
+        SLACK_MESSAGE: "Workflow *${{ steps.workflow-Status.outputs.workflow_result }}*\nJob: ${{ steps.workflow-Status.outputs.failed_job }}\nStep: ${{ steps.workflow-Status.outputs.failed_step }}"
         SLACK_TITLE: 'Status:'
         SLACK_USERNAME: GitHub Action
         SLACK_FOOTER: '${{ github.workflow }}#${{ github.run_number }}'
