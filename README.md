@@ -1,21 +1,43 @@
-# Hello world docker action test
+# Workflow Status action 
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+This action returns the workflow status (Success, Cancelled, Failure), in case of failure it also returns "<failed-job-name>" and <failed-step-name>.
 
 ## Inputs
 
-### `who-to-greet`
+### `workflow_name`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The name of the workflow we are curently running. Default `"<placeholder-workflow-name>"`.
+
+### `github_run_id`
+
+**Required** A unique number for each run within a repository. This number does not change if you re-run the workflow run. Default `"<placeholder-github_run_id>"`.
+
+### `github_repository`
+
+**Required** The owner and repository name. For example, Codertocat/Hello-World. Default `"<placeholder-github-repository>"`.
 
 ## Outputs
 
-### `time`
+### `workflow_result`
 
-The time we greeted you.
+The result of the current workflow run (Success, Cancelled, Failure).
+
+### `failed_job`
+
+The name of the job that was failed(only if workflow conclusion is Failure)
+
+### `failed_step`
+
+The name of the step that was failed(only if workflow conclusion is Failure)
+
+### `notification_color`
+The color for A slack notification (Green, Yelllow, Red).
 
 ## Example usage
-
-uses: actions/hello-world-docker-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+- name: Workflow Status 
+  id: workflow-status
+  uses: pixellot/workflow-status
+  with:
+    workflow_name:  ${{ github.workflow }}
+    github_run_id: ${{ github.run_id }}
+    github_repository: ${{ github.repository }}
