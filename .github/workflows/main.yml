@@ -27,7 +27,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       run: |
         echo " Stub - Use nodejs"    
-        exit 1
+        #exit 1
           
   push_image_job:
     name: Upload to ECR
