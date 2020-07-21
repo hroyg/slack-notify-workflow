@@ -16,11 +16,11 @@ inputs:
     default: '<placeholder-github-repository>'  
 outputs:
   workflow_result: # id of output
-    default: test
     description: 'The result of the current workflow run (success,cancelled,failure)'
   failed_job: 
     description: 'The name of the job that was failed(only if workflow conclusion is failure)'  
   failed_step: 
+    default: 'test'
     description: 'The name of the step that was failed(only if workflow conclusion is failure)'  
 runs:
   using: 'docker'
