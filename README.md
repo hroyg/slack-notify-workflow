@@ -4,40 +4,26 @@ This action returns the workflow status (Success, Cancelled, Failure), in case o
 
 ## Inputs
 
-### `workflow_name`
-
-**Required** The name of the workflow we are curently running. Default `"<placeholder-workflow-name>"`.
-
-### `github_run_id`
-
-**Required** A unique number for each run within a repository. This number does not change if you re-run the workflow run. Default `"<placeholder-github_run_id>"`.
-
-### `github_repository`
-
-**Required** The owner and repository name. For example, Codertocat/Hello-World. Default `"<placeholder-github-repository>"`.
+- `workflow_name` -(**Required:**)- The name of the workflow we are curently running. Default `"<placeholder-workflow-name>"`.
+- `github_run_id` -(**Required:**)- A unique number for each run within a repository. This number does not change if you re-run the workflow run. Default `"<placeholder-github_run_id>"`.
+- github_repository` -(**Required:**)- The owner and repository name. For example, Codertocat/Hello-World. Default `"<placeholder-github-repository>"`.
 
 ## Outputs
 
-### `workflow_result`
+- `workflow_result` - The result of the current workflow run (Success, Cancelled, Failure).
 
-The result of the current workflow run (Success, Cancelled, Failure).
+- `failed_job` - The name of the job that was failed (only if workflow conclusion is Failure).
 
-### `failed_job`
+- `failed_step` - The name of the step that was failed (only if workflow conclusion is Failure).
 
-The name of the job that was failed(only if workflow conclusion is Failure)
-
-### `failed_step`
-
-The name of the step that was failed(only if workflow conclusion is Failure)
-
-### `notification_color`
-The color for A slack notification (Green, Yelllow, Red).
+- `notification_color` - The color for A slack notification (Green, Yelllow, Red).
 
 ## Example usage
-- name: Workflow Status 
+```- name: Workflow Status 
   id: workflow-status
   uses: pixellot/workflow-status
   with:
     workflow_name:  ${{ github.workflow }}
     github_run_id: ${{ github.run_id }}
     github_repository: ${{ github.repository }}
+```
