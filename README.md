@@ -1,6 +1,6 @@
 # Workflow Status action 
 
-This action returns the workflow status (Success, Cancelled, Failure), in case of failure it also returns the failed job name and the failed job step name.
+`This` action returns the workflow status (Success, Cancelled, Failure), in case of failure it also returns the failed job name and the failed job step name.
 
 ## Inputs
 
