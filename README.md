@@ -1,14 +1,14 @@
 # Workflow Status action 
 
-This action returns the workflow status (Success, Cancelled, Failure), in case of failure it also returns the failed jpb name and the failed job step name.
+This action returns the workflow status (Success, Cancelled, Failure), in case of failure it also returns the failed job name and the failed job step name.
 
 ## Inputs
 
-- `workflow_name` -(**required**)- The name of the workflow we are curently running. 
+- `workflow_name` - (**required**) - The name of the workflow we are curently running. 
    Default: `"<placeholder-workflow-name>"`.
-- `github_run_id` -(**required**)- A unique number for each run within a repository. This number does not change if you re-run the workflow run. 
+- `github_run_id` - (**required**) - A unique number for each run within a repository. This number does not change if you re-run the workflow run. 
    Default: `"<placeholder-github_run_id>"`.
-- `github_repository` -(**required**)- The owner and repository name. e.g, pixellot/Hello-World. 
+- `github_repository` - (**required**) - The owner and repository name. e.g, pixellot/Hello-World.\n 
    Default: `"<placeholder-github-repository>"`.
 
 ## Outputs
