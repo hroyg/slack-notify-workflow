@@ -138,8 +138,8 @@ jobs:
 
     - uses: actions/checkout@v2    
         
-    - name: Hello world action step
-      id: hello
+    - name: Workflow Status Status
+      id: workflow-Status
       uses: ./
       with:
         workflow_name:  ${{ github.workflow }}
@@ -151,9 +151,9 @@ jobs:
       env:
         SLACK_WEBHOOK: '${{ secrets.SLACK_URL }}'
         SLACK_CHANNEL: 'github-action-slack'
-        SLACK_COLOR: '${{ notification_color }}'
+        SLACK_COLOR: '${{ steps.workflow-Status.outputs.notification_color }}'
         SLACK_ICON: https://github.githubassets.com/images/modules/logos_page/Octocat.png?size=48
-        SLACK_MESSAGE: 'Workflow ${{ steps.hello.outputs.workflow_result }} ${{ steps.hello.outputs.failed_job }} ${{ steps.hello.outputs.failed_step }}'
+        SLACK_MESSAGE: 'Workflow ${{ steps.workflow-Status.outputs.workflow_result }} ${{ steps.workflow-Status.outputs.failed_job }} ${{ steps.workflow-Status.outputs.failed_step }}'
         SLACK_TITLE: 'Status:'
         SLACK_USERNAME: GitHub Action
         SLACK_FOOTER: '${{ github.workflow }}#${{ github.run_number }}'
