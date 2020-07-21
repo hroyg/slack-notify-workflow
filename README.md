@@ -1,4 +1,4 @@
-# Workflow Status action 
+# Workflow Status Action 
 
 This action returns the workflow status (Success, Cancelled, Failure), in case of failure it also returns the failed job name and the failed job step name.
 
