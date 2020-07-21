@@ -41,7 +41,7 @@ test-slack:
   
   - name: Workflow Status 
     id: workflow-status
-    uses: pixellot/workflow-status
+    uses: pixellot/workflow-status@master
     with:
       workflow_name:  ${{ github.workflow }}
       github_run_id: ${{ github.run_id }}
