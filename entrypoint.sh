@@ -28,12 +28,16 @@ done
 
 case "${workflow_success},${workflow_failure}" in                                                        
                                                                                                                                                                                                                  
-  false,false)   echo "::set-output name=workflow_result::cancelled"  ;;                           
+  false,false)   echo "::set-output name=workflow_result::cancelled"    
+                 echo "::set-output name=notification_color::#F56918"  ;;
+  
                                                                                                          
   true,true  )   echo "::set-output name=workflow_result::failure"                                
                  echo "::set-output name=failed_job::Job:$failed_job"  
-                 echo "::set-output name=failed_step::Step:$failed_job_step"  ;;                                                                                                                        
+                 echo "::set-output name=failed_step::Step:$failed_job_step"
+                 echo "::set-output name=notification_color::#F72407"  ;;                                                                                                                        
                                                                                                          
-  *          )   echo "::set-output name=workflow_result::success"  ;;                            
+  *          )   echo "::set-output name=workflow_result::success"
+                 echo "::set-output name=notification_color::#63DE0E";;                            
 
 esac
