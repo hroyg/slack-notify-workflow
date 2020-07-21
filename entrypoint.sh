@@ -33,8 +33,8 @@ case "${workflow_success},${workflow_failure}" in
   
                                                                                                          
   true,true  )   echo "::set-output name=workflow_result::failure"                                
-                 echo "::set-output name=failed_job::;Job:$failed_job"  
-                 echo "::set-output name=failed_step::;Step:$failed_job_step"
+                 echo "::set-output name=failed_job::; Job:$failed_job"  
+                 echo "::set-output name=failed_step::; Step:$failed_job_step"
                  echo "::set-output name=notification_color::#F72407"  ;;                                                                                                                        
                                                                                                          
   *          )   echo "::set-output name=workflow_result::success"
